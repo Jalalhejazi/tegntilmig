@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Tegn til mig";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Tegn her</h2>
+        <form method="post" action="/Home/SaveDrawing" class="sigPad">
+            <div class="sig sigWrapper">
+                <canvas class="pad" width="200" height="200"></canvas>
+                <input type="hidden" name="output" class="output">
+            </div>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <!--[if lt IE 9]<script src="~/Scripts/assets/flashcanvas.js"></script>><![endif]-->
+    <script src="~/Scripts/jquery.signaturepad.js"></script>
+    <script src="~/Scripts/assets/json2.min.js"></script>
+    <script src="~/Scripts/Draw.js"></script>
+}

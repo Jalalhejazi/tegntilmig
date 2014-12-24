@@ -1,0 +1,49 @@
+﻿@model TegnTilMig.Models.Drawing
+
+@{
+    ViewBag.Title = "Latest drawing";
+}
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Ingen tegning</h3>
+        </div>
+    </div>
+}
+else
+{
+<div class="row">
+    <div class="col-md-4">
+        <h3>Tegning fra @Model.CreatedAt</h3>
+        <form method="post" action="/Home/SaveDrawing" class="sigPad">
+            <div class="sig sigWrapper">
+                <canvas class="pad" width="200" height="200"></canvas>
+                <input type="hidden" name="output" class="output">
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <!--[if lt IE 9]<script src="~/Scripts/assets/flashcanvas.js"></script>><![endif]-->
+    <script src="~/Scripts/jquery.signaturepad.js"></script>
+    <script src="~/Scripts/assets/json2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('.sigPad').signaturePad({
+                defaultAction: 'drawIt',
+                drawOnly: true,
+                displayOnly: true
+            }).regenerate(@Html.Raw(Model.DrawingString));
+        });
+
+        setTimeout(function () {
+            location.reload();
+        }, 10000);
+
+    </script>
+}
+}
